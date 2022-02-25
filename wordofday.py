@@ -7,6 +7,7 @@ import pywhatkit
 import pyautogui as pg
 import time
 import keyboard as k
+import config
 
 
 # url = 'https://www.dictionary.com/e/word-of-the-day/'
@@ -26,13 +27,12 @@ def sendwhatsapp(word):
 
     
     # pywhatkit.add_driver_path('/Users/masoodahamed/chromedriver')
-    # pywhatkit.sendwhatmsg(f'"+9962400803", "hello{word}, 02, 06, True')
+    # pywhatkit.sendwhatmsg(f'config.mobile_number, "hello{word}, 02, 06, True')
     try:
         time.sleep(5)
-        pywhatkit.sendwhatmsg_instantly("+919962400803", "hello - test messaging",wait_time=60)
+        pywhatkit.sendwhatmsg_instantly(config.mobile_number, "hello - test messaging",wait_time=60)
         print('message sent successfully')
-    # pywhatkit.sendwhatmsg_instantly("+919790916046", "hello - test messaging", 15,True, 4)
-    # pywhatkit.sendwhatmsg_instantly(f'"+919790916046", {word}', 15,True, 4)
+    # pywhatkit.sendwhatmsg_instantly(config.mobile_number, "hello - test messaging", 15,True, 4)
     # pg.click()
   
         # pg.press("enter")

@@ -1,3 +1,4 @@
+from math import fabs
 import os
 import pyautogui
 import time
@@ -5,6 +6,7 @@ import time
 
 def wp():
     os.system("open /Applications/Whatsapp.app")
+    time.sleep(10)
     # pyautogui.click(941,457, clicks =2); pyautogui.typewrite('Hello world \n')
     # pyautogui.screenshot('tab1.png',region=(0,0,1697,153))
     x,y= pyautogui.locateCenterOnScreen('screen.png', confidence=0.5)
@@ -19,9 +21,3 @@ def wp():
 
 
 wp()
-
-# (left=3058, top=284, width=68, height=54)
-
-# pyautogui.screenshot('tab1.png', region=(left=3058, top=284, width=68, height=54))  
-
-

@@ -26,11 +26,12 @@ def get_word_of_the_day():
 def sendwhatsapp(word):
 
     
-    # pywhatkit.add_driver_path('/Users/masoodahamed/chromedriver')
-    # pywhatkit.sendwhatmsg(f'config.mobile_number, "hello{word}, 02, 06, True')
+        # pywhatkit.add_driver_path('/Users/masoodahamed/chromedriver')
     try:
         time.sleep(5)
-        pywhatkit.sendwhatmsg_instantly(config.mobile_number, "hello - test messaging",wait_time=60)
+        
+        # pywhatkit.sendwhatmsg(f'config.mobile_number, "hello", 02, 06, True')
+        pywhatkit.sendwhatmsg_instantly(config.mobile_number, "hello - test messaging\n")
         print('message sent successfully')
     # pywhatkit.sendwhatmsg_instantly(config.mobile_number, "hello - test messaging", 15,True, 4)
     # pg.click()

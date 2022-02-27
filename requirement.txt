@@ -34,6 +34,7 @@ nest-asyncio==1.5.4
 numpy==1.22.2
 opencv-python==4.5.5.62
 outcome==1.1.0
+pandas==1.4.1
 parso==0.8.3
 pathspec==0.9.0
 pexpect==4.8.0
@@ -192,6 +193,7 @@ PyRect==0.1.4
 PyScreeze==0.1.28
 python-dateutil==2.8.2
 pytweening==1.0.4
+pytz==2021.3
 pywhatkit==5.3
 pyxdg==0.27
 pyzmq==22.3.0

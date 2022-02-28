@@ -11,31 +11,42 @@ import config
 import pandas as pd
 import os
 
-
-
-def extractword():
+def initialize():
     url='https://www.britannica.com/dictionary/eb/word-of-the-day'
 
     r = requests.get(url,headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:97.0) Gecko/20100101 Firefox/97.0'})
+    
+    global soup 
     soup = BeautifulSoup(r.text, 'html.parser')
+   
+
+def extractword():
     word = soup.find('span', {'class': 'hw_txt'}).text
     definition = soup.find('div', {'class': 'midbs'}).text
 
-        
+
+    wordimage = soup.find('div', {'class': 'wod_img_act'})
+    title = soup.find('div', {'class': 'wod_img_tit'}).text
+    wordimage = wordimage.find('img')
+    wordimage=wordimage.get('src')
+
+
+
+
 
     word_definition = {
-            'word': word, 
-            'definition': definition
+            'word': word + '\n', 
+            'definition': definition + '\n',
+            'image_value':wordimage + '\n',
+            'title': title + '\n'
             }
+    for item in word_definition:
+        word_definition[item].replace('[]', '')
 
     df = pd.DataFrame(word_definition, index=[1])
 
     dict_val= df.to_dict()
-    # word_definition ={
-    #     'word': {1: 'precipitation'}, 
-    #     'definition': {1: '\n\n\n\n1 [noncount] : water that falls to the ground as rain, snow, etc.\n\n\n\n\n\n\nThe weather forecast calls for some sort of frozen precipitation tomorrow—either snow or sleet.\n\na 50 percent chance of precipitation\n\n\n\n\n\n\n\n\n2 [count, noncount] technical : the process of separating a solid substance from a liquid\n\n\n\n\n\n\nMinerals are separated from the seawater by precipitation.\n\n\n\n\n\n'}
-    #     }
-
+    
     word_definition = dict_val
     return word_definition
 
@@ -51,12 +62,16 @@ def wordperday(word_definition):
 
     import re
     meaning = re.sub("([\(\[]).*?([\)\]])", "\g<1>\g<2>", result)
+    meaning = meaning.replace('[]', '')
 
-    newilst = []
-    newilst.append(word_definition['word'][1])
-    newilst.append(meaning)
+    newlist = []
+    newlist.append(word_definition['word'][1])
+    newlist.append(f'{meaning} "\n"')
+    newlist.append(word_definition['image_value'][1])
+    newlist.append(word_definition['title'][1])
 
-    return newilst
+
+    return newlist  
 
 def sendwhatsapp(newword):
  
@@ -73,7 +88,9 @@ def sendwhatsapp(newword):
 
 
 if __name__ == '__main__':
+    initialize()
     word_value = extractword()
+    print('this is from the dictionary  ', word_value)
     newword = wordperday(word_value)
     sendwhatsapp(newword)
 

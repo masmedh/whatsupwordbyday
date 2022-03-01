@@ -68,20 +68,19 @@ class wordwhatsapp():
         import re
         meaning = re.sub("([\(\[]).*?([\)\]])", "\g<1>\g<2>", result)
         meaning = meaning.replace('[]', '')
-        
+        meaning = meaning.replace('()', '')
         
     
 
-        newlist = []
-        newlist.append(word_definition['word'][1])
-        newlist.append(f'{meaning} "\n"')
-        newlist.append(word_definition['image_value'][1])
-        newlist.append(word_definition['title'][1])
+        self.newlist = []
+        self.newlist.append(word_definition['word'][1])
+        self.newlist.append(f'{meaning} "\n"')
+        self.newlist.append(word_definition['image_value'][1])
+        self.newlist.append(word_definition['title'][1])
 
+        return self.newlist  
 
-        return newlist  
-
-    def sendwhatsapp(self, newword):
+    def sendwhatsapp(self,newword):
     
         try:
             time.sleep(5)
